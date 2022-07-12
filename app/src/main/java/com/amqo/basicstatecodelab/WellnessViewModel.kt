@@ -9,12 +9,18 @@ class WellnessViewModel: ViewModel() {
     val tasks: List<WellnessTask>
         get() = _tasks
 
-    private fun getWellnessTasks() = List(30) {
-        i -> WellnessTask(i, "Task $i")
-    }
-
     fun remove(task: WellnessTask) {
         _tasks.remove(task)
+    }
+
+    fun changeChecked(changingTask: WellnessTask, checked: Boolean) {
+        _tasks.find { it.id == changingTask.id }?.let { task ->
+            task.checked = checked
+        }
+    }
+
+    private fun getWellnessTasks() = List(30) {
+            i -> WellnessTask(i, "Task $i")
     }
 }
 
